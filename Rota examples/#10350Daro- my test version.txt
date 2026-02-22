@@ -1,0 +1,316 @@
+;;neither of these works
+;d L^P025ZA("\\uhb\wcl\PICS\Live Development\#10350 Darolutamide\DARO.txt")
+;d L^P025ZA("\\uhb\wcl\PICS\Live Development\#10350 DROTA930 Darolutamide\DAROrota.txt")
+;;
+
+
+;d L^P025ZA("\\uhb\wcl\PICS\Live Development\#10350 DROTA930 Darolutamide\#10350Daro.txt")
+
+;d BuildSet^P040EA,OverInd^P040EC,BuildR^P040EF
+
+
+Drug Messages
+  Code: DAROneuts
+    CUT
+  Code: DAROplats
+    CUT
+  Code: DAROgfr
+    CUT
+  Code: DARObili
+    CUT
+  Code: DAROalt
+    CUT	
+END
+ 
+Drug Messages
+  Code: DAROneuts
++   Message target: sysACTION
++   Text line 1: Neuts < 1.0 x 10 9/L
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}.
++   Text line 3: Contact prescriber. Reduced neutrophils common with longer treatment
+  Code: DAROplats
++   Message target: sysACTION
++   Text line 1: Plts < 100 x 10^9/L
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}.
++   Text line 3: Contact prescriber.
+  Code: DAROgfr
++   Text line 1: GFR < 30mL/min
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}.
++   Text line 3: Contact prescriber, consider 300mg BD starting dose.
++ Code: DARObili
++   Message target: sysACTION
++   Text line 1: Bilirubin > 31 umol/L
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}.
++   Text line 3: Contact prescriber. Consider 300mg BD starting dose in hepatic impairment. Darolutamide is also known to affect liver function.
++ Code: DAROalt
++   Message target: sysACTION
++   Text line 1: ALT  > 165 U/L
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}.
++   Text line 3: Contact prescriber. Consider 300mg BD starting dose in hepatic impairment. Darolutamide is also known to affect liver function.
+END
+
+;;UHB only ;;;
+Drug Template
+  Template Code: DARO_Daro600BD_TTO
+    CUT
+  Template Code: DARO_Daro300BD_TTO
+    CUT
+  Template Code: DARO_Daro600BD_REG
+    CUT
+END
+
+Drug Template
++ Template Code: DARO_Daro600BD_TTO
++   Description: Darolutamide 600mg BD TTO
++   Prescription mode: REG_T
++   Drug: DARO
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 600
++     Units: mg
++   Frequency: BD
++ Template Code: DARO_Daro300BD_TTO
++   Prescription mode: REG_T
++   Drug: DARO
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 300
++     Units: mg
++   Frequency: BD
++ Template Code: DARO_Daro600BD_REG
++   Description: Darolutamide 600mg BD REG
++   Prescription mode: REG
++   Drug: DARO
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 600
++     Units: mg
++   Frequency: BD
+END
+
+Rota Stage
++ Stage Code: DARO_Stage1
+    CUT
+END
+Rota Stage
+  Stage Code: DARO_Stage1
+    Non-Sequenced Templates
++     Seq: 2
++       Template: DARO_Daro600BD_REG
++       Excluded by default: Y
++       Alternate to: 0
++     Seq: 1
++       Template: DARO_Daro300BD_TTO
++       Excluded by default: Y
++       Alternate to: 0
++     Seq: 0
++       Template: DARO_Daro600BD_TTO
++   In or Outpatient? (I/O): O
+END
+
+Rota
+  Rota Code: DARO
+    CUT
+END
+Rota
++ Rota Code: DARO
++   Description: Darolutamide
+    Approval
++     Available: N
++     Default stage start time: 09:00
++     Default cycles: 12
++     Cycle delay: 4w
++     Rota code: Drota930
+    Stages
++     Seq: 0
++       Description: Darolutamide stage 1
++       Rota stage: DARO_Stage1
++   Info URL: http://pics-client-web/static/PICS/Specialties/Oncology/DROTA930.htm
+    Directorate overrides
++     Directorate: ONC
++       Available: Y
+    Privilege required
++     Privilege to final authorise: CHDPRES!CHNURSE!PHARMFA
+;;+   First available live: 28.03.23
++   Authorise multiple stages?: Y
+    Configuration notes
++     Notes: Ticket number #10350	
+END
+	
+Rota
+  Rota Code: DARO
+    Stages
+      Seq: 0
+        Activation Result warnings
+          Investigations
++           Investigation Code: PLATS
++           Test: PLATS
++             Maximum result age: 1w
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
++           Investigation Code: NEUTS
++           Test: NEUTS
++             Maximum result age: 1w
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
++           Investigation Code: GFR
++           Test: GFR
++             Maximum result age: 1w
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
++           Investigation Code: BILI
++           Test: BILI
++             Maximum result age: 1w
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
++           Investigation Code: ALT
++           Test: ALT
++             Maximum result age: 1w
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
+          Conditions
++           Condition No: 4
+              Levels
++               Investigation Code: ALT
++               Test: ALT
++                 Value: 165
++                 Function: GT
+              Messages
++               Message code: DAROalt
++                 Severity: sysPassword
++           Condition No: 3
+              Levels
++               Investigation Code: BILI
++               Test: BILI
++                 Value: 31
++                 Function: GT
+              Messages
++               Message code: DARObili
++                 Severity: sysPassword
++           Condition No: 2
+              Levels
++               Investigation Code: GFR
++               Test: GFR
++                 Value: 30
++                 Function: LT
+              Messages
++               Message code: DAROgfr
++                 Severity: sysPassword
++           Condition No: 1
+              Levels
++               Investigation Code: NEUTS
++               Test: NEUTS
++                 Value: 1
++                 Function: LT
+              Messages
++               Message code: DAROneuts
++                 Severity: sysPassword
++           Condition No: 0
+              Levels
++               Investigation Code: PLATS
++               Test: PLATS
++                 Value: 100
++                 Function: LT
+              Messages
++               Message code: DAROplats
++                 Severity: sysPassword
+    Result warnings
+      Investigations
+        REORDER
++       Investigation Code: PLATS
++       Test: PLATS
++         Maximum result age: 1w
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword
++       Investigation Code: NEUTS
++       Test: NEUTS
++         Maximum result age: 1w
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword
++       Investigation Code: GFR
+;;;        Test: NEUTS
++       Test: GFR
++         Maximum result age: 1w
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword
++       Investigation Code: BILI
+;;        Test: GFR
++       Test: BILI
++         Maximum result age: 1w
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword
++       Investigation Code: ALT
++       Test: ALT
++         Maximum result age: 1w
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword	
+          Conditions
++           Condition No: 4
+              Levels
++               Investigation Code: ALT
++               Test: ALT
++                 Value: 165
++                 Function: GT
+              Messages
++               Message code: DAROalt
++                 Severity: sysPassword
++           Condition No: 3
+              Levels
++               Investigation Code: BILI
++               Test: BILI
++                 Value: 31
++                 Function: GT
+              Messages
++               Message code: DARObili
++                 Severity: sysPassword
++           Condition No: 2
+              Levels
++               Investigation Code: GFR
++               Test: GFR
++                 Value: 30
++                 Function: LT
+              Messages
++               Message code: DAROgfr
++                 Severity: sysPassword
++           Condition No: 1
+              Levels
++               Investigation Code: NEUTS
++               Test: NEUTS
++                 Value: 1
++                 Function: LT
+              Messages
++               Message code: DAROneuts
++                 Severity: sysPassword
++           Condition No: 0
+              Levels
++               Investigation Code: PLATS
++               Test: PLATS
++                 Value: 100
++                 Function: LT
+              Messages
++               Message code: DAROplats
++                 Severity: sysPassword
+END
+
+Rota Class
+  Class Code: UROLOGY
+    Items
++     Code: DARO
++       Description: Darolutamide
++       Rota/Rota group/Rota class: R
++       Rota: DARO
+END
+

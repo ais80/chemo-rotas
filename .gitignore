@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+output/
+input/
+.flask.log
+=22.0
+=3.0
+Thumbs.db

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Stop Chemo Rota Converter
+Comment=Stop the Chemo Rota Converter web server
+Exec=bash -c 'cd "/home/office/Documents/PICS/Chemo rotas" && bash stop.sh; sleep 2'
+Terminal=true
+Icon=process-stop
+StartupNotify=false
+Categories=Office;MedicalSoftware;

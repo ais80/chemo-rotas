@@ -1,0 +1,1076 @@
+;d L^P025ZA("\\uhb\wcl\PICS\Live Development\#11813 HROTA49 FLAG new version\#11813 FLAG HROTA49")
+
+;d BuildSet^P040EA,OverInd^P040EC,BuildR^P040EF
+
+;http://pics-test1/static/PICS/Specialties/HAE/HROTA49v2.htm
+
+Pharmacy Drug
+  Pharmacy Code: FLUDAR
+    Drug Forms
+      Drug Form: DRG
+        Formulae
+          Formula definition
++           Formula Code: FLUDOSE24
++             Description: 24mg/m2
+              Parameters
++               Parameter: BSA
++                 Description: BSA
++                 System wide formula: BSA
+              Calculation definition
++               Function code: FLUDOSE24
++                 Description: 24mg/m2
++                 Calculation: {BSA}*24
++             Units: mg
++             Default calculation: FLUDOSE24
+END
+
+Pharmacy Drug
+  Pharmacy Code: FLUDAR
+    Drug Forms
+      Drug Form: DRG
+        Formulae
+          Formula definition
+            Formula Code: FLUDOSE24
++             Description: 24mg/m2[80% of 30mg/m2]
+-             Description: 24mg/m2
+              Bands
++               Band: <=312.24
++                 Value > (gt): 287.22
++                 Value <= (le): 312.24
++                 Value: 300
++               Band: <=287.22
++                 Value > (gt): 262.19
++                 Value <= (le): 287.22
++                 Value: 275
++               Band: <=262.19
++                 Value > (gt): 237.17
++                 Value <= (le): 262.19
++                 Value: 250
++               Band: <=237.17
++                 Value > (gt): 214.77
++                 Value <= (le): 237.17
++                 Value: 225
++               Band: <=214.77
++                 Value > (gt): 194.74
++                 Value <= (le): 214.77
++                 Value: 205
++               Band: <=194.74
++                 Value > (gt): 174.72
++                 Value <= (le): 194.74
++                 Value: 185
++               Band: <=174.72
++                 Value > (gt): 157.32
++                 Value <= (le): 174.72
++                 Value: 165
++               Band: <=157.32
++                 Value > (gt): 142.29
++                 Value <= (le): 157.32
++                 Value: 150
++               Band: <=142.29
++                 Value > (gt): 127.27
++                 Value <= (le): 142.29
++                 Value: 135
++               Band: <=127.27
++                 Value > (gt): 114.89
++                 Value <= (le): 127.27
++                 Value: 120
++               Band: <=114.89
++                 Value > (gt): 104.87
++                 Value <= (le): 114.89
++                 Value: 110
++               Band: <=104.87
++                 Value > (gt): 94.87
++                 Value <= (le): 104.87
++                 Value: 100
++               Band: <=094.87
++                 Value > (gt): 87.47
++                 Value <= (le): 94.87
++                 Value: 90
++               Band: <=087.47
++                 Value > (gt): 82.44
++                 Value <= (le): 87.47
++                 Value: 85
++               Band: <=082.44
++                 Value > (gt): 77.44
++                 Value <= (le): 82.44
++                 Value: 80
++               Band: <=077.44
++                 Value > (gt): 72.44
++                 Value <= (le): 77.44
++                 Value: 75
++               Band: <=072.44
++                 Value > (gt): 67.44
++                 Value <= (le): 72.44
++                 Value: 70
++               Band: <=067.44
++                 Value > (gt): 62.44
++                 Value <= (le): 67.44
++                 Value: 65
++               Band: <=062.44
++                 Value > (gt): 57.44
++                 Value <= (le): 62.44
++                 Value: 60
++               Band: <=057.44
++                 Value > (gt): 52.44
++                 Value <= (le): 57.44
++                 Value: 55
++               Band: <=052.44
++                 Value > (gt): 47.42
++                 Value <= (le): 52.44
++                 Value: 50
++               Band: <=047.42
++                 Value > (gt): 43.72
++                 Value <= (le): 47.42
++                 Value: 45
++               Band: <=043.72
++                 Value > (gt): 41.22
++                 Value <= (le): 43.72
++                 Value: 42.5
++               Band: <=041.22
++                 Value > (gt): 38.72
++                 Value <= (le): 41.22
++                 Value: 40
++               Band: <=038.72
++                 Value > (gt): 36.22
++                 Value <= (le): 38.72
++                 Value: 37.5
++               Band: <=036.22
++                 Value > (gt): 33.72
++                 Value <= (le): 36.22
++                 Value: 35
++               Band: <=033.72
++                 Value > (gt): 31.22
++                 Value <= (le): 33.72
++                 Value: 32.5
++               Band: <=031.22
++                 Value > (gt): 28.72
++                 Value <= (le): 31.22
++                 Value: 30
++               Band: <=028.72
++                 Value > (gt): 26.22
++                 Value <= (le): 28.72
++                 Value: 27.5
++               Band: <=026.22
++                 Value > (gt): 23.72
++                 Value <= (le): 26.22
++                 Value: 25
++               Band: <=023.72
++                 Value > (gt): 21.22
++                 Value <= (le): 23.72
++                 Value: 22.5
++               Band: <=021.22
++                 Value > (gt): 18.97
++                 Value <= (le): 21.22
++                 Value: 20
++               Band: <=018.97
++                 Value > (gt): 16.97
++                 Value <= (le): 18.97
++                 Value: 18
++               Band: <=016.97
++                 Value > (gt): 15.22
++                 Value <= (le): 16.97
++                 Value: 16
++               Band: <=015.22
++                 Value > (gt): 13.72
++                 Value <= (le): 15.22
++                 Value: 14.5
+              Free text description
++               Line Code: 0
++                 Text: This formula is banded.
+END
+Pharmacy Drug
+  Pharmacy Code: FLUDAR
+    Drug Forms
+      Drug Form: DRG
+        Formulae
+          Dose formulae
+            Overrides
+              Code: OVR1
+                Data
++                 Dose Formula: FLUDOSE24
+END
+
+;;
+
+Drug Messages
+  Code: FLAG_Filg_Admin
+    CUT
+  Code: FLAG_Cytar_Over60
+    CUT
+  Code: FLAG_Fluid_Intake
+    CUT
+  Code: FLAG_Cyt_GFR50%
+    CUT
+  Code: FLAG_Cyt_GFR<30
+    CUT
+  Code: FLAG_Flud_GFR80%
+    CUT
+  Code: FLAG_Cyt_Bil
+    CUT
+  Code: FLAG_Flud_GFR<30
+    CUT
+
+END
+
+Drug Messages
++ Code: FLAG_Filg_Admin
++   Message target: sysDOCPRESC,sysNURSEADM
++   Text line 1: Filgrastim is given from days 1-7 and is an integral part of the chemotherapy schedule, please administer.
+;;not used;;+ Code: FLAG_Cytar_Over60
+;;not used;;+   Message target: sysDOCPRESC
+;;not used;;+   Text line 1: For patients 60 years and above.
++ Code: FLAG_Fluid_Intake
++   Message target: sysDOCPRESC,sysNURSEADM
++   Text line 1: Ensure fluid input of at least three litres daily - orally or intravenous.
++ Code: FLAG_Cyt_GFR50%
++   Message target: sysACTION
++   Text line 1: GFR 30-59 ml/min.
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}
++   Text line 3: 50% dose of Cytarabine recommended.
++ Code: FLAG_Cyt_GFR<30
++   Message target: sysACTION
++   Text line 1: GFR level <30 ml/min.
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}
++   Text line 3: Cytarabine use not recommended.
++ Code: FLAG_Flud_GFR80%
++   Message target: sysACTION
++   Text line 1: GFR level 30-70 ml/min.
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}
++   Text line 3: 80% of total fludarabine dose recommended.
++ Code: FLAG_Cyt_Bil
++   Message target: sysACTION
++   Text line 1: Bilirubin level >50 umol/L.
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}
++   Text line 3: Contact prescriber may need 50% cytarabine dose reduction
++ Code: FLAG_Flud_GFR<30
++   Message target: sysACTION
++   Text line 1: GFR level <30 ml/min.
++   Text line 2: {{{RESULT}}} at {{{RESTIME}}}
++   Text line 3: Contact prescriber regarding Fludarabine dose.
+END
+
+Drug Template
+  Template Code: FLAG_Fludar24
+    CUT
+  Template Code: FLAG_FilgV2
+    CUT
+  Template Code: FLAG_Allo100
+    CUT
+  Template Code: FLAG_Acic400
+    CUT
+  Template Code: FLAG_Allo300
+    CUT
+  Template Code: FLAG_Acic200
+    CUT
+  Template Code: FLAG_Meto
+    CUT
+  Template Code: FLAG_Lansop
+    CUT
+  Template Code: FLAG_CotrimBD
+    CUT
+  Template Code: FLAG_CotrimOD
+    CUT
+  Template Code: FLAG_Ambi
+    CUT
+  Template Code: FLAG_Benz
+    CUT
+  Template Code: FLAG_Chlorhex
+    CUT
+  Template Code: FLAG_OndanV2
+    CUT
+  Template Code: FLAG_Rasbur
+    CUT
+  Template Code: FLAG_DexaV2
+    CUT
+  Template Code: FLAG_FilgV2_OOF
+    CUT
+  Template Code: FLAG_PredEye_2HD
+    CUT
+END
+
+;Live version is using 2H
+Drug Template
++ Template Code: FLAG_PredEye_2HD
++   Description: Prednisolone 0.5% eye drops 2HD d2-11
++   Prescription mode: REG
++   Drug: PREDNIS
++   Form: DRP
+    Main Form
++     Route: EYEB
++     Dose: 0.5
++     Units: pcent
++     Secondary Quantity: 1
++     Secondary Quantity Units: drop
++   Frequency: 2HD
+    End time
++     End Day: 9
++     End after: LAST
+END
+
+Drug Template
++ Template Code: FLAG_Fludar24
++   Description: Fludarabine 24mg/m2
++   Prescription mode: CON_I
++   Drug: SODIUM CL
++   Form: DIL
+    Main Form
++     Route: INF
++     Dose: 0.9
++     Units: pcent
++     Secondary Quantity: 100
++     Secondary Quantity Units: ml
+    Infusion setups
++     Infusion Type: drug
++     Initial Rate: 200
++     Rate Mode: 0
++     Number of Bags: 1
++     Infusion line: 1
++   Frequency: LIM
+    Components
++     Drug: FLUDAR
++       Form: DRG
++       Dose Mode: formula
++       Formula: FLUDOSE24
++       Formula resolve mode: 3
++ Template Code: FLAG_FilgV2
++   Description: Filgrastim by weight OD d2-7
++   Prescription mode: REG
++   Drug: FILGRASTIM
++   Form: INJ
+    Main Form
++     Route: SC
++     Dose Mode: 4
++     Formula: F4.875
++     Formula resolve mode: 3
++   Frequency: OD
++   Times: MIDMORN
+    End time
++     End Day: 5
++     End after: LAST
+    Annotations
+      Default
+        Annotation free text
++         Line: 0
++           Text: Part of chemotherapy- please administer.
++ Template Code: FLAG_Allo100
++   Description: Allopurinol 100 mg
++   Prescription mode: REG
++   Drug: ALLOP
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 100
++     Units: mg
++   Frequency: OD
++   Times: MIDMORN
+    End time
++     End Day: 27
++     End after: LAST
++ Template Code: FLAG_Acic400
++   Description: Aciclovir 400mg BD 4w
++   Prescription mode: REG
++   Drug: ACIC
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 400
++     Units: mg
++   Frequency: BD
++   Times: MIDMORN,TEATIME
+    End time
++     End Day: 27
++     End after: LAST
++ Template Code: FLAG_Allo300
++   Description: Allopurinol 300 mg
++   Prescription mode: REG
++   Drug: ALLOP
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 300
++     Units: mg
++   Frequency: OD
++   Times: MIDMORN
+    End time
++     End Day: 27
++     End after: LAST
++ Template Code: FLAG_Acic200
++   Description: Aciclovir 200mg BD 4w
++   Prescription mode: REG
++   Drug: ACIC
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 200
++     Units: mg
++   Frequency: BD
++   Times: MIDMORN,TEATIME
+    End time
++     End Day: 27
++     End after: LAST
++ Template Code: FLAG_Meto
++   Description: Metoclopramide 10mg TAB/INJ PRN 8H
++   Prescription mode: PRN
++   Drug: METOCLOP
++   Form: TAB
++   Alternate Form: INJ
+    Main Form
++     Route: ORAL
++     Dose: 10
++     Units: mg
+    Alternatives
++     Alternate Route: IVB
++     Alternate Dose: 10
++     Alternate Units: mg
+    PRN setups
++     Max per day: 30
++     Max per day units: mg
++   Frequency: 8H
+;;1000h and 1200h too close together, and no effect for PRN
+;;+   Times: MIDMORN,MIDDAY,LAST
+    End time
++     End Day: 6
++     End after: LAST
++ Template Code: FLAG_Lansop
++   Description: Lansoprazole 30mg OD
++   Prescription mode: REG
++   Drug: LANSOPRAZO
++   Form: CAP
+    Main Form
++     Route: ORAL
++     Dose: 30
++     Units: mg
++   Frequency: OD
++   Times: MIDMORN
+    End time
++     End Day: 27
++     End after: LAST
++ Template Code: FLAG_CotrimBD
++   Description: Cotrimoxazole 480mg REG BDTTW MWF
++   Prescription mode: REG
++   Drug: CO-TRIMOX
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 480
++     Units: mg
++   Frequency: BDTTW
++   Times: MIDMORN,LAST
++   Days of the week: 1,3,5
+    End time
++     End offset: 4w
++ Template Code: FLAG_CotrimOD
++   Description: Cotrimoxazole 480mg REG ODTTW MWF
++   Prescription mode: REG
++   Drug: CO-TRIMOX
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 480
++     Units: mg
++   Frequency: TTW
++   Times: MIDMORN,LAST
++   Days of the week: 1,3,5
+    End time
++     End offset: 4w
++ Template Code: FLAG_Ambi
++   Description: Ambisome 50mg IVI EOD
++   Prescription mode: REG
++   Drug: AMBISOME
++   Form: INJ
+    Main Form
++     Route: IVI
++     Dose: 50
++     Units: mg
++   Frequency: EOD
++   Times: MIDMORN
+    End time
++     End Day: 27
++     End after: LAST
++ Template Code: FLAG_Benz
++   Description: Benzydamine mw qds
++   Prescription mode: REG
++   Drug: BENZYDAMIN
++   Form: MW
+    Main Form
++     Route: OROM
++     Dose: 0.15
++     Units: pcent
++     Secondary Quantity: 10
++     Secondary Quantity Units: ml
++   Frequency: QDS
++ Template Code: FLAG_Chlorhex
++   Description: Chlorhexidine 0.2% Mouthwash QDS
++   Prescription mode: REG
++   Drug: CHLORHEXOS
++   Form: MW
+    Main Form
++     Route: OROM
++     Dose: 0.2
++     Units: pcent
++     Secondary Quantity: 10
++     Secondary Quantity Units: ml
++   Frequency: QDS
++ Template Code: FLAG_OndanV2
++   Description: Ondansetron 8mg TAB/INJ REG BD d2-6
++   Prescription mode: REG
++   Drug: ONDAN
++   Form: TAB
++   Alternate Form: INJ
+    Main Form
++     Route: ORAL
++     Dose: 8
++     Units: mg
+    Alternatives
++     Alternate Route: IVB
++     Alternate Dose: 8
++     Alternate Units: mg
++   Frequency: BD
+    End time
++     End Day: 4
++     End after: LAST
++ Template Code: FLAG_Rasbur
++   Description: Rasburicase 3mg IVI OD 1w
++   Prescription mode: REG
++   Drug: RASBURICASE
++   Form: INJ
+    Main Form
++     Route: IVI
++     Dose: 3
++     Units: mg
++   Frequency: OD
++   Times: MIDMORN
+    End time
++     End Day: 6
++     End after: LAST
++ Template Code: FLAG_DexaV2
++   Description: Dexamethasone 2mg d2-6
++   Prescription mode: REG
++   Drug: DEXAMETH
++   Form: TAB
+    Main Form
++     Route: ORAL
++     Dose: 2
++     Units: mg
++   Frequency: TDS
++   Times: BFAST,MIDDAY,SIXTH
+    End time
++     End Day: 4
++     End after: LAST
++ Template Code: FLAG_FilgV2_OOF
++   Description: Filgrastim by weight OOF
++   Prescription mode: OOF
++   Drug: FILGRASTIM
++   Form: INJ
+    Main Form
++     Route: SC
++     Dose Mode: 4
++     Formula: F4.875
++     Formula resolve mode: 3
++   Frequency: OOF
+;;No effect for OOF, nor for sequenced drugs.
+;;+   Times: MIDMORN
+END
+
+Rota Stage
+  Stage Code: FLAG_Stage1v2
+    CUT
+END
+
+Rota Stage
++  Stage Code: FLAG_Stage1v2
++   Description: FLAG stage 1
+    Sequenced Templates
+;;d1
++     Seq: 0
++       Template: FLAG_FilgV2_OOF
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to start?: Y
+;;d2
++     Seq: 1
++       Template: FLAG_Fludar
+        Sequence relations
++         Key: 0
++           Time offset: 1d
++           Relative to seq: 0
++       Prepared in pharmacy?: Y
++     Seq: 2
++       Template: FLAG_Fludar24
+        Sequence relations
++         Key: 0
++           Time offset: 1d
++           Relative to seq: 0
++       Alternate to: 1
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++     Seq: 3
++       Template: FLAG_Sodium3.5
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 1
++         Key: 1
++           Time offset: 0
++           Relative to seq: 2
++     Seq: 4
++       Template: FLAG_Cytar_2.0
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 3
++       Prepared in pharmacy?: Y
++     Seq: 5
++       Template: FLAG_Cytar50
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 3
++       Alternate to: 4
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
+;;d3
++     Seq: 6
++       Template: FLAG_Sodium4
+        Sequence relations
++         Key: 0
++           Time offset: 1d
++           Relative to seq: 1
++           Relative to start?: Y
++         Key: 1
++           Time offset: 1d
++           Relative to seq: 2
++           Relative to start?: Y
++     Seq: 7
++       Template: FLAG_Fludar
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 6
++       Prepared in pharmacy?: Y
++       Include with: 1
++     Seq: 8
++       Template: FLAG_Fludar24
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 6
++       Alternate to: 7
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 2
++     Seq: 9
++       Template: FLAG_Sodium3.5
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 7
++         Key: 1
++           Time offset: 0
++           Relative to seq: 8
++     Seq: 10
++       Template: FLAG_Cytar_2.0
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 9
++       Prepared in pharmacy?: Y
++       Include with: 4
++     Seq: 11
++       Template: FLAG_Cytar50
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 9
++       Alternate to: 10
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 5
+;;d4
++     Seq: 12
++       Template: FLAG_Sodium4
+        Sequence relations
++         Key: 0
++           Time offset: 1d
++           Relative to seq: 6
++           Relative to start?: Y
++     Seq: 13
++       Template: FLAG_Fludar
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 12
++       Prepared in pharmacy?: Y
++       Include with: 7
++     Seq: 14
++       Template: FLAG_Fludar24
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 12
++       Alternate to: 13
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 8
++     Seq: 15
++       Template: FLAG_Sodium3.5
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 13
++         Key: 1
++           Time offset: 0
++           Relative to seq: 14
++     Seq: 16
++       Template: FLAG_Cytar_2.0
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 15
++       Prepared in pharmacy?: Y
++       Include with: 4
++     Seq: 17
++       Template: FLAG_Cytar50
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 15
++       Alternate to: 16
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 5
+;;d5
++     Seq: 18
++       Template: FLAG_Sodium4
+        Sequence relations
++         Key: 0
++           Time offset: 1d
++           Relative to seq: 12
++           Relative to start?: Y
++     Seq: 19
++       Template: FLAG_Fludar
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 18
++       Prepared in pharmacy?: Y
++       Include with: 13
++     Seq: 20
++       Template: FLAG_Fludar24
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 18
++       Alternate to: 19
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 14
++     Seq: 21
++       Template: FLAG_Sodium3.5
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 19
++         Key: 1
++           Relative to seq: 20
++     Seq: 22
++       Template: FLAG_Cytar_2.0
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 21
++       Prepared in pharmacy?: Y
++       Include with: 16
++     Seq: 23
++       Template: FLAG_Cytar50
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 21
++       Alternate to: 22
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 17
+;;d6
++     Seq: 24
++       Template: FLAG_Sodium4
+        Sequence relations
++         Key: 0
++           Time offset: 1d
++           Relative to seq: 18
++           Relative to start?: Y
++     Seq: 25
++       Template: FLAG_Fludar
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 24
++       Prepared in pharmacy?: Y
++       Include with: 19
++     Seq: 26
++       Template: FLAG_Fludar24
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 24
++       Alternate to: 25
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 20
++     Seq: 27
++       Template: FLAG_Sodium3.5
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 25
++         Key: 1
++           Time offset: 0
++           Relative to seq: 26
++     Seq: 28
++       Template: FLAG_Cytar_2.0
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 27
++       Prepared in pharmacy?: Y
++       Include with: 22
++     Seq: 29
++       Template: FLAG_Cytar50
+        Sequence relations
++         Key: 0
++           Time offset: 0
++           Relative to seq: 27
++       Alternate to: 28
++       Excluded by default: Y
++       Prepared in pharmacy?: Y
++       Include with: 23
+    Non-Sequenced Templates
++     Seq: 15
++       Template: FLAG_Chlorhex
++     Seq: 14
++       Template: FLAG_Benz
++     Seq: 13
++       Template: FLAG_Ambi
++     Seq: 12
++       Template: FLAG_CotrimOD
++       Excluded by default: Y
++       Alternate to: 11
++     Seq: 11
++       Template: FLAG_CotrimBD
++     Seq: 10
++       Template: FLAG_Lansop
++     Seq: 9
++       Template: FLAG_OndanV2
++       Time offset: 1d
++     Seq: 8
++       Template: FLAG_Meto
++       Time offset: 1d
++     Seq: 7
++       Template: FLAG_DexaV2
++       Time offset: 1d
++     Seq: 6
++       Template: FLAG_Acic200
++       Excluded by default: Y
++       Alternate to: 5
++     Seq: 5
++       Template: FLAG_Acic400
++     Seq: 4
++       Template: FLAG_Allo100
++       Excluded by default: Y
++       Alternate to: 3
++     Seq: 3
++       Template: FLAG_Allo300
++     Seq: 2
++       Template: FLAG_PredEye_2HD
++       Time offset: 1d
++     Seq: 1
++       Template: FLAG_FilgV2
++       Time offset: 1d
++     Seq: 0
++       Template: FLAG_Rasbur
++       Excluded by default: Y
++   Default stage start time: 09:00
++   In or Outpatient? (I/O): I
+END
+
+Rota
+  Rota Code: FLAGv2
+    CUT
+END
+
+Rota
+  Rota Code: FLAGv2
++   Description: FLAG (Filgrastim, Fludarabine, Cytarabine)
+    Approval
++     Available: N
++     Default stage start time: 09:00
++     Default cycles: 1
++     Cycle delay: 4w
++     Rota code: HROTA49v2
+    Messages
++     Message code: FLAG_Fluid_Intake
++       Severity: sysInfo
++     Message code: FLAG_Filg_Admin
++       Severity: sysInfo
+    Stages
++     Seq: 0
++       Description: FLAG
++       Rota stage: FLAG_Stage1v2
+        Activation Result warnings
+          Investigations
++           Investigation Code: GFR
++           Test: GFR
++             Maximum result age: 4d
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
++           Investigation Code: BILI
++           Test: BILI
++             Maximum result age: 4d
+              No result warnings
++               Message code: ROTANORES
++                 Severity: sysPassword
+          Conditions
++           Condition No: 3
+              Levels
++               Investigation Code: BILI
++               Test: BILI
++                 Value: 50
++                 Function: GT
+              Messages
++               Message code: FLAG_Cyt_Bil
++                 Severity: sysPassword
++           Condition No: 2
+              Levels
++               Investigation Code: GFR
++               Test: GFR
++                 Value: 30-70
++                 Function: IN
+              Messages
++               Message code: FLAG_Flud_GFR80%
++                 Severity: sysPassword
++           Condition No: 1
+              Levels
++               Investigation Code: GFR
++               Test: GFR
++                 Value: 30
++                 Function: LT
+              Messages
++               Message code: FLAG_Cyt_GFR<30
++                 Severity: sysPassword
++               Message code: FLAG_Flud_GFR<30
++                 Severity: sysPassword
++           Condition No: 0
+              Levels
++               Investigation Code: GFR
++               Test: GFR
++                 Value: 30-59
++                 Function: IN
+              Messages
++               Message code: FLAG_Cyt_GFR50%
++                 Severity: sysPassword
++   Info URL: http://pics-client-web/static/PICS/Specialties/HAE/HROTA49v2.htm
+    Directorate overrides
++     Directorate: HAE
++       Available: Y
+    Privilege required
+;;Rota specifies nurses should NOT be able to authorise.
+;;+     Privilege to final authorise: CHDPRES!CHNURSE
+    Configuration notes
++     Notes: #11813
+END
+
+Rota
+  Rota Code: FLAGv2
+    Result warnings
+      Investigations
++       Investigation Code: GFR
++       Test: GFR
++         Maximum result age: 4d
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword
++       Investigation Code: BILI
++       Test: BILI
++         Maximum result age: 4d
+          No result warnings
++           Message code: ROTANORES
++             Severity: sysPassword
+      Conditions
++       Condition No: 3
+          Levels
++           Investigation Code: BILI
++           Test: BILI
++             Value: 50
++             Function: GT
+          Messages
++           Message code: FLAG_Cyt_Bil
++             Severity: sysPassword
++       Condition No: 2
+          Levels
++           Investigation Code: GFR
++           Test: GFR
++             Value: 30-70
++             Function: IN
+          Messages
++           Message code: FLAG_Flud_GFR80%
++             Severity: sysPassword
++       Condition No: 1
+          Levels
++           Investigation Code: GFR
++           Test: GFR
++             Value: 30
++             Function: LT
+          Messages
++           Message code: FLAG_Cyt_GFR<30
++             Severity: sysPassword
++           Message code: FLAG_Flud_GFR<30
++             Severity: sysPassword
++       Condition No: 0
+          Levels
++           Investigation Code: GFR
++           Test: GFR
++             Value: 30-59
++             Function: IN
+          Messages
++           Message code: FLAG_Cyt_GFR50%
++             Severity: sysPassword
+END
+
+Rota Class
+  Class Code: AML
+    Items
++     Code: FLAGv2
++       Description: FLAGv2
++       Rota/Rota group/Rota class: R
++       Rota: FLAGv2
+END
+
+;;retire current version
+Rota
+  Rota Code: FLAG
++   Description: FLAG [superseded ##.##.##]
+-   Description: FLAG
+    Messages
++     Message code: ROTA_SUPERSEDED
++       Severity: sysPassword
+    Directorate overrides
+      Directorate: HAE
++       Available: N
+-       Available: Y
+END
+
+Rota Stage
+  Stage Code: FLAG_Stage1
++   Description: FLAG Days 1-7 [superseded]
+-   Description: FLAG Days 1-7
+END
+
+Rota Class
+  Class Code: AML
+    Items
+      Code: FLAG
++       Description: [superseded] FLAG
+-       Description: FLAG
+END

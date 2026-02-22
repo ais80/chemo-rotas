@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Chemo Rota Converter
+Comment=Start the Chemo Rota to EPMA Converter web app
+Exec=bash -c 'cd "/home/office/Documents/PICS/Chemo rotas" && bash start.sh; read -p "Press Enter to close..."'
+Terminal=true
+Icon=document-send
+StartupNotify=true
+Categories=Office;MedicalSoftware;
