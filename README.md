@@ -81,12 +81,32 @@ Chemo rotas/
     generate_txt.py        config -> TXT
     generate_docx.py       config -> DOCX
     models.py              data classes
+  portable/              Standalone HTML app (for NHS Windows)
   input/                 Drop new PDFs here
   output/                Generated files appear here
   Rota example/          Reference files
   requirements.txt       Python dependencies
   CLAUDE.md              Full technical specification
 ```
+
+## Portable Mode (NHS Windows)
+
+For locked-down NHS machines where you can't install Python or run executables:
+
+### At home (Linux)
+Extract the PDF into a config YAML using the CLI:
+```bash
+.venv/bin/python3 convert.py extract "input/YourRota.pdf"
+```
+Copy the generated `output/YourRota_config.yaml` to a USB stick along with `portable/chemo-rota-portable.html`.
+
+### At work (NHS Windows)
+1. Open `chemo-rota-portable.html` in Edge (or any browser)
+2. Load the config YAML file (drag-and-drop or use the file picker)
+3. Review and edit the extracted data in the form
+4. Click **Generate & Download** to get a ZIP containing the TXT and DOCX files
+
+The portable HTML is a single self-contained file (~100KB) with all libraries inlined — no network access, no installation, no Python needed.
 
 ## Notes
 
