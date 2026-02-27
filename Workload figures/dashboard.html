@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PICS SACT Pharmacy Dashboard 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --nhs-blue: #005eb8;
+    --nhs-dark-blue: #003087;
+    --nhs-bright-blue: #0072ce;
+    --nhs-light-blue: #41b6e6;
+    --nhs-aqua: #00a9ce;
+    --nhs-green: #009639;
+    --nhs-dark-green: #006747;
+    --nhs-warm-yellow: #ffb81c;
+    --nhs-orange: #ed8b00;
+    --nhs-red: #da291c;
+    --nhs-pink: #ae2573;
+    --nhs-purple: #330072;
+    --bg: #f0f4f5;
+    --card-bg: #ffffff;
+    --text: #231f20;
+    --text-muted: #4c6272;
+    --border: #d8dde0;
+    --oncology: #0072ce;
+    --haematology: #ae2573;
+    --total-color: #005eb8;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Frutiger', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--nhs-dark-blue), var(--nhs-blue));
+    color: white;
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .header .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+
+  .header .badge {
+    background: rgba(255,255,255,0.18);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 24px 24px 48px;
+  }
+
+  /* Period tabs */
+  .period-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .period-tab {
+    padding: 10px 20px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .period-tab:hover { border-color: var(--nhs-blue); color: var(--nhs-blue); }
+
+  .period-tab.active {
+    background: var(--nhs-blue);
+    border-color: var(--nhs-blue);
+    color: white;
+  }
+
+  /* KPI cards */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .kpi-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--nhs-blue);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .kpi-card.green { border-left-color: var(--nhs-green); }
+  .kpi-card.orange { border-left-color: var(--nhs-orange); }
+  .kpi-card.pink { border-left-color: var(--nhs-pink); }
+  .kpi-card.aqua { border-left-color: var(--nhs-aqua); }
+
+  .kpi-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .kpi-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--nhs-dark-blue);
+    line-height: 1.1;
+  }
+
+  .kpi-detail {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .kpi-detail .onc { color: var(--oncology); font-weight: 600; }
+  .kpi-detail .haem { color: var(--haematology); font-weight: 600; }
+
+  /* Chart cards */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .chart-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .chart-card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .chart-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chart-wrapper {
+    position: relative;
+    width: 100%;
+    max-height: 340px;
+  }
+
+  /* Pipeline */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .pipeline-stage {
+    text-align: center;
+    padding: 16px 24px;
+    min-width: 140px;
+    position: relative;
+  }
+
+  .pipeline-stage .stage-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--nhs-dark-blue);
+  }
+
+  .pipeline-stage .stage-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .pipeline-arrow {
+    font-size: 1.6rem;
+    color: var(--nhs-light-blue);
+    flex-shrink: 0;
+  }
+
+  .pipeline-bar {
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 8px;
+    transition: width 0.6s ease;
+  }
+
+  /* Legend */
+  .legend-row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .data-table th {
+    background: var(--nhs-dark-blue);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+
+  .data-table th:not(:first-child) { text-align: center; }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .data-table td:not(:first-child) {
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .data-table tr:nth-child(even) { background: #f8fafb; }
+  .data-table tr:hover { background: #e8f4fd; }
+
+  .data-table .total-col { color: var(--nhs-dark-blue); font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+  /* Print */
+  @media print {
+    .header { background: var(--nhs-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .period-tabs { display: none; }
+    .chart-card, .kpi-card { break-inside: avoid; box-shadow: none; border: 1px solid var(--border); }
+    body { background: white; }
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 18px 16px; }
+    .header h1 { font-size: 1.2rem; }
+    .container { padding: 16px 12px; }
+    .chart-grid { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .pipeline { flex-direction: column; }
+    .pipeline-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>PICS SACT Pharmacy Dashboard</h1>
+    <div class="subtitle">University Hospitals Birmingham NHS Foundation Trust</div>
+  </div>
+  <div class="badge">Data up to 17 December 2025</div>
+</div>
+
+<div class="container">
+
+  <div class="period-tabs">
+    <div class="period-tab active" onclick="switchPeriod('cumulative')">Cumulative (Full Year)</div>
+    <div class="period-tab" onclick="switchPeriod('q1_3')">Jan &ndash; Sep 2025</div>
+    <div class="period-tab" onclick="switchPeriod('q4')">Sep &ndash; Dec 2025</div>
+  </div>
+
+  <div class="legend-row">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--oncology)"></div> Oncology</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--haematology)"></div> Haematology</div>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="kpi-row" id="kpi-row"></div>
+
+  <!-- Pipeline -->
+  <div class="chart-card full-width" style="margin-bottom:20px">
+    <h3>Rota Template Pipeline</h3>
+    <div class="pipeline" id="pipeline"></div>
+  </div>
+
+  <!-- Charts row 1 -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3>Templates by Specialty</h3>
+      <div class="chart-wrapper"><canvas id="chartSpecialty"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Testing Coverage</h3>
+      <div class="chart-wrapper"><canvas id="chartTesting"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Charts row 2 -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3>Workload Breakdown</h3>
+      <div class="chart-wrapper"><canvas id="chartWorkload"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Period Comparison &mdash; Key Metrics</h3>
+      <div class="chart-wrapper"><canvas id="chartComparison"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Data table -->
+  <div class="chart-card full-width">
+    <h3>Detailed Data</h3>
+    <div style="overflow-x:auto">
+      <table class="data-table" id="dataTable"></table>
+    </div>
+  </div>
+
+  <div class="footer">
+    PICS SACT Pharmacy Team &mdash; Data compiled by Hasan Varachhia, Specialist Pharmacist
+  </div>
+</div>
+
+<script>
+const DATA = {
+  q1_3: {
+    label: 'Jan \u2013 Sep 2025',
+    written:          { onc: 22, haem: 27, total: 49 },
+    sent_programming: { onc: 9,  haem: 14, total: 23 },
+    being_reviewed:   { onc: 13, haem: 13, total: 26 },
+    updates:          { onc: 5,  haem: 5,  total: 10 },
+    updates_sent:     { onc: 5,  haem: 5,  total: 10 },
+    tested_pharm:     { onc: 16, haem: 17, total: 33, tests_onc: 30, tests_haem: 28, tests_total: 58 },
+    tested_nursing:   { onc: 3,  haem: 0,  total: 3 },
+    tested_doctors:   { onc: 9,  haem: 11, total: 20 },
+    gone_live:        { onc: 3,  haem: 0,  total: 3 },
+  },
+  q4: {
+    label: 'Sep \u2013 Dec 2025',
+    written:          { onc: 3,  haem: 5,  total: 8 },
+    sent_programming: { onc: 2,  haem: 3,  total: 5 },
+    being_reviewed:   { onc: 1,  haem: 2,  total: 3 },
+    updates:          { onc: 18, haem: 1,  total: 19 },
+    updates_sent:     { onc: 18, haem: 1,  total: 19 },
+    tested_pharm:     { onc: 15, haem: 4,  total: 19, tests_onc: 19, tests_haem: 8, tests_total: 27 },
+    tested_nursing:   { onc: 3,  haem: 7,  total: 10, tests_onc: 3, tests_haem: 8, tests_total: 11 },
+    tested_doctors:   { onc: 9,  haem: 2,  total: 11 },
+    gone_live:        { onc: 3,  haem: 7,  total: 10 },
+  },
+  cumulative: {
+    label: 'Cumulative to Dec 2025',
+    written:          { onc: 25, haem: 32, total: 57 },
+    sent_programming: { onc: 11, haem: 17, total: 28 },
+    being_reviewed:   { onc: 14, haem: 15, total: 29 },  // Note: email says 3 for total but 14+15=29
+    updates:          { onc: 23, haem: 6,  total: 29 },
+    updates_sent:     { onc: 23, haem: 6,  total: 29 },
+    tested_pharm:     { onc: 31, haem: 21, total: 52, tests_onc: 49, tests_haem: 36, tests_total: 85 },
+    tested_nursing:   { onc: 6,  haem: 7,  total: 13, tests_onc: 6, tests_haem: 8, tests_total: 14 },
+    tested_doctors:   { onc: 18, haem: 13, total: 31 },
+    gone_live:        { onc: 6,  haem: 7,  total: 13 },
+  }
+};
+
+let currentPeriod = 'cumulative';
+let charts = {};
+
+function switchPeriod(period) {
+  currentPeriod = period;
+  document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderAll();
+}
+
+function renderKPIs() {
+  const d = DATA[currentPeriod];
+  const kpis = [
+    { label: 'Templates Written', value: d.written.total, detail: `Onc <span class="onc">${d.written.onc}</span> / Haem <span class="haem">${d.written.haem}</span>`, cls: '' },
+    { label: 'Sent to Programming', value: d.sent_programming.total, detail: `Onc <span class="onc">${d.sent_programming.onc}</span> / Haem <span class="haem">${d.sent_programming.haem}</span>`, cls: 'orange' },
+    { label: 'Rotas Gone Live', value: d.gone_live.total, detail: `Onc <span class="onc">${d.gone_live.onc}</span> / Haem <span class="haem">${d.gone_live.haem}</span>`, cls: 'green' },
+    { label: 'Pharmacist Tests', value: d.tested_pharm.tests_total || '—', detail: `On <strong>${d.tested_pharm.total}</strong> rotas`, cls: 'aqua' },
+    { label: 'Template Updates', value: d.updates.total, detail: `Onc <span class="onc">${d.updates.onc}</span> / Haem <span class="haem">${d.updates.haem}</span>`, cls: 'pink' },
+  ];
+
+  document.getElementById('kpi-row').innerHTML = kpis.map(k => `
+    <div class="kpi-card ${k.cls}">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-detail">${k.detail}</div>
+    </div>
+  `).join('');
+}
+
+function renderPipeline() {
+  const d = DATA[currentPeriod];
+  const stages = [
+    { value: d.written.total, label: 'Written', color: '#005eb8' },
+    { value: d.sent_programming.total, label: 'Sent to\nProgramming', color: '#0072ce' },
+    { value: d.tested_pharm.total, label: 'Pharmacist\nTested', color: '#41b6e6' },
+    { value: d.tested_doctors.total, label: 'Doctor\nTested', color: '#00a9ce' },
+    { value: d.tested_nursing.total, label: 'Nursing\nTested', color: '#009639' },
+    { value: d.gone_live.total, label: 'Gone Live', color: '#006747' },
+  ];
+  const maxVal = Math.max(...stages.map(s => s.value), 1);
+
+  document.getElementById('pipeline').innerHTML = stages.map((s, i) => {
+    const barWidth = Math.max((s.value / maxVal) * 100, 8);
+    const arrow = i < stages.length - 1 ? '<div class="pipeline-arrow">\u25B6</div>' : '';
+    return `
+      <div class="pipeline-stage">
+        <div class="stage-value">${s.value}</div>
+        <div class="stage-label">${s.label.replace('\n', '<br>')}</div>
+        <div class="pipeline-bar" style="width:${barWidth}%; background:${s.color}; margin:8px auto 0;"></div>
+      </div>
+      ${arrow}
+    `;
+  }).join('');
+}
+
+function renderChartSpecialty() {
+  const d = DATA[currentPeriod];
+  const ctx = document.getElementById('chartSpecialty').getContext('2d');
+  if (charts.specialty) charts.specialty.destroy();
+
+  charts.specialty = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Written', 'Sent to Prog.', 'Under Review', 'Updates', 'Gone Live'],
+      datasets: [
+        {
+          label: 'Oncology',
+          data: [d.written.onc, d.sent_programming.onc, d.being_reviewed.onc, d.updates.onc, d.gone_live.onc],
+          backgroundColor: 'rgba(0,114,206,0.8)',
+          borderRadius: 4,
+        },
+        {
+          label: 'Haematology',
+          data: [d.written.haem, d.sent_programming.haem, d.being_reviewed.haem, d.updates.haem, d.gone_live.haem],
+          backgroundColor: 'rgba(174,37,115,0.8)',
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { beginAtZero: true, ticks: { stepSize: 5 } }
+      }
+    }
+  });
+}
+
+function renderChartTesting() {
+  const d = DATA[currentPeriod];
+  const ctx = document.getElementById('chartTesting').getContext('2d');
+  if (charts.testing) charts.testing.destroy();
+
+  charts.testing = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Pharmacist', 'Doctors', 'Nursing'],
+      datasets: [
+        {
+          label: 'Oncology',
+          data: [d.tested_pharm.onc, d.tested_doctors.onc, d.tested_nursing.onc],
+          backgroundColor: 'rgba(0,114,206,0.8)',
+          borderRadius: 4,
+        },
+        {
+          label: 'Haematology',
+          data: [d.tested_pharm.haem, d.tested_doctors.haem, d.tested_nursing.haem],
+          backgroundColor: 'rgba(174,37,115,0.8)',
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        subtitle: { display: true, text: 'Number of rotas tested by role', font: { size: 12 }, color: '#4c6272' }
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Rotas tested' } }
+      }
+    }
+  });
+}
+
+function renderChartWorkload() {
+  const d = DATA[currentPeriod];
+  const ctx = document.getElementById('chartWorkload').getContext('2d');
+  if (charts.workload) charts.workload.destroy();
+
+  charts.workload = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Written (new)', 'Updates', 'Sent to Programming', 'Under Review', 'Gone Live'],
+      datasets: [{
+        data: [d.written.total, d.updates.total, d.sent_programming.total, d.being_reviewed.total, d.gone_live.total],
+        backgroundColor: [
+          '#005eb8', '#ae2573', '#ed8b00', '#41b6e6', '#009639'
+        ],
+        borderWidth: 2,
+        borderColor: '#fff',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 16, font: { size: 12 } } },
+      },
+      cutout: '55%',
+    }
+  });
+}
+
+function renderChartComparison() {
+  const ctx = document.getElementById('chartComparison').getContext('2d');
+  if (charts.comparison) charts.comparison.destroy();
+
+  const p1 = DATA.q1_3;
+  const p2 = DATA.q4;
+
+  charts.comparison = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Written', 'Sent to Prog.', 'Updates', 'Pharm Tests', 'Gone Live'],
+      datasets: [
+        {
+          label: 'Jan\u2013Sep',
+          data: [p1.written.total, p1.sent_programming.total, p1.updates.total, p1.tested_pharm.total, p1.gone_live.total],
+          backgroundColor: 'rgba(0,48,135,0.75)',
+          borderRadius: 4,
+        },
+        {
+          label: 'Sep\u2013Dec',
+          data: [p2.written.total, p2.sent_programming.total, p2.updates.total, p2.tested_pharm.total, p2.gone_live.total],
+          backgroundColor: 'rgba(255,184,28,0.85)',
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } },
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+}
+
+function renderTable() {
+  const d = DATA[currentPeriod];
+  const rows = [
+    ['SACT Rota templates written', d.written],
+    ['Templates sent to programming', d.sent_programming],
+    ['Templates being reviewed', d.being_reviewed],
+    ['Rota template updates', d.updates],
+    ['Updates sent to programming', d.updates_sent],
+    ['Rotas tested by pharmacist', d.tested_pharm],
+    ['Rotas tested by nursing', d.tested_nursing],
+    ['Rotas tested by doctors', d.tested_doctors],
+    ['Rotas gone live', d.gone_live],
+  ];
+
+  let html = `
+    <thead><tr>
+      <th>Metric</th>
+      <th style="color:#9ec5ff">Oncology</th>
+      <th style="color:#e8a0c9">Haematology</th>
+      <th>Total</th>
+    </tr></thead><tbody>`;
+
+  rows.forEach(([label, vals]) => {
+    html += `<tr>
+      <td>${label}</td>
+      <td>${vals.onc}</td>
+      <td>${vals.haem}</td>
+      <td class="total-col">${vals.total}</td>
+    </tr>`;
+  });
+  html += '</tbody>';
+  document.getElementById('dataTable').innerHTML = html;
+}
+
+function renderAll() {
+  renderKPIs();
+  renderPipeline();
+  renderChartSpecialty();
+  renderChartTesting();
+  renderChartWorkload();
+  renderChartComparison();
+  renderTable();
+}
+
+renderAll();
+</script>
+</body>
+</html>
