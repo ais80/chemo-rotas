@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated output
+output/
+
+# Large source directories (HTML pages and Rota originals)
+Downloaded_pages html rota info/
+Rotas/
+
+# Claude Code local settings
+.claude/
+
+# Temp files
+*.tmp
+~$*
